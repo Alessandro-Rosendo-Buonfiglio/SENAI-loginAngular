@@ -1,0 +1,78 @@
+<br><br><br>
+
+<div class="row" style="background-color: white;">      
+    <!-- https://getbootstrap.com/docs/5.2/forms/overview/ -->
+    <form class="col-6 offset-3" *ngIf="formCliente" [formGroup]="formCliente">
+        <div class="row">
+            <label for="" class="col-sm-12">Nome</label>
+            <input class="form-control" type="text" formControlName="cliente_nome">
+        </div>
+        <div class="row" *ngIf="(cliente_nome) && (cliente_nome.errors) && (cliente_nome.dirty)">
+            <h6 *ngIf="cliente_nome.errors['required']" class="label_erro">
+                Nome é obrigatório.
+            </h6>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-sm-4">
+                <label for="" class="col-sm-12">Dia</label>
+                <select class="form-control" formControlName="cliente_data_dia">
+                    <option value="" disabled selected>Escolha o dia</option>
+                    <option *ngFor="let item of [].constructor(31); let i = index" value="{{ i + 1}}">{{ i + 1}}</option>
+                </select>
+                <div class="row" *ngIf="(cliente_data_dia) && (cliente_data_dia.errors) && (cliente_data_dia.dirty)">
+                    <h6 *ngIf="cliente_data_dia.errors['required']" class="label_erro">
+                        Dia é obrigatório.
+                    </h6>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <label for="" class="col-sm-12">Mês</label>
+                <select class="form-control" formControlName="cliente_data_mes">
+                    <option value="" disabled selected>Escolha o mês</option>
+                    <option *ngFor="let mes of meses; let i = index" value="{{i + 1}}">{{ mes }}</option>
+                </select>
+                <div class="row" *ngIf="(cliente_data_mes) && (cliente_data_mes.errors) && (cliente_data_mes.dirty)">
+                    <h6 *ngIf="cliente_data_mes.errors['required']" class="label_erro">
+                        Mês é obrigatório.
+                    </h6>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <label for="" class="col-sm-12">Ano</label>
+                <select class="form-control" formControlName="cliente_data_ano">
+                    <option value="" disabled selected>Escolha a data</option>
+                    <option *ngFor="let item of [].constructor(123); let i = index" value="{{ i + 1900}}">{{ i + 1900}}</option>
+                </select>
+                <div class="row" *ngIf="(cliente_data_ano) && (cliente_data_ano.errors) && (cliente_data_ano.dirty)">
+                    <h6 *ngIf="cliente_data_ano.errors['required']" class="label_erro">
+                        Ano é obrigatório.
+                    </h6>
+                </div>
+            </div>
+
+
+        </div><br>
+        <div class="row">
+            <label for="" class="col-sm-12">Senha</label>
+            <input class="form-control" type="password" formControlName="cliente_senha">
+        </div>
+        <div class="row" *ngIf="(cliente_senha) && (cliente_senha.errors) && (cliente_senha.dirty)">
+            <h6 *ngIf="cliente_senha.errors['required']" class="label_erro">
+                Senha é obrigatória.
+            </h6>
+            <h6 *ngIf="cliente_senha.errors['minlength']" class="label_erro">
+                Minimo 4 caracteres.
+            </h6>
+            <h6 *ngIf="cliente_senha.errors['maxlength']" class="label_erro">
+                Maximo 8 caracteres.
+            </h6>
+        </div>
+        <br>
+        <div class="row">
+            <button [disabled]="!formCliente.valid" (click)="enviar()" class="col-sm-12 btn btn-primary" type="text">Entrar</button>
+        </div>
+        <h6  class="label_erro" *ngIf="!formCliente.valid">Preencha todos os campos</h6>
+    </form>
+    <!--{{ formCliente.value | json }}-->
+</div>
